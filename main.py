@@ -6,9 +6,9 @@ import re, os, datetime
 from jinja2 import Environment, FileSystemLoader
 
 DATAFILE = "git-data.txt"
-HTMLFILE = "gitBook.html"
+HTMLFILE = "gitBook.txt"
 HEADING = "RepoName"
-TEMPLATE_DIR = os.path.join(os.path.abspath('templates'),"github")
+TEMPLATE_DIR = os.path.join(os.path.abspath('templates'),"asciidoc")
 
 ENV = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
 
@@ -47,10 +47,10 @@ for r_commit in r_commits:
         commit.time = datet.strftime('%I:%M:%S %p')
     commits.append(commit)
     
-template = ENV.get_template("main.html")
+template = ENV.get_template("main.txt")
 
 data = {"title":HEADING,
-        "style":get_css(TEMPLATE_DIR),
+        "style":None, #get_css(TEMPLATE_DIR),
         "commits":commits}
 
 f = open(HTMLFILE,"w")
